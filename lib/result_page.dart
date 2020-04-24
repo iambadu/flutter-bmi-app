@@ -3,6 +3,14 @@ import 'constants.dart';
 import 'widgets.dart';
 
 class ResultsPage extends StatelessWidget {
+  ResultsPage(
+      {@required this.bmiResult,
+      @required this.resultText,
+      @required this.interpretation});
+
+  final String bmiResult;
+  final String resultText;
+  final String interpretation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,25 +32,42 @@ class ResultsPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ReusableCard(
-                colour: kActivCardbgColor,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'NORMAL',
-                      style: kResultTextStyle,
-                    ),
-                    Text(
-                      '18.3',
-                      style: kResultNumber,
-                    ),
-                    Text(
-                        'Your BMI result is quite low, you have to eat more food',
-                        textAlign: TextAlign.center,
-                        style: kBodyText),
-                  ],
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0),
+                child: ReusableCard(
+                  colour: kActivCardbgColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        resultText,
+                        style: kResultTextStyle,
+                      ),
+                      Text(
+                        bmiResult,
+                        style: kResultNumber,
+                      ),
+                      Column(children: <Widget>[
+                        Container(
+                            padding: EdgeInsets.all(10.0),
+                            child: Text(
+                              'Normal BMI range:',
+                              style: klabelTextStyle,
+                            )),
+                        Text(
+                          '18.5 - 25 kg/m2',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ]),
+                      Text(interpretation,
+                          textAlign: TextAlign.center, style: kBodyText),
+                    ],
+                  ),
                 ),
               ),
               flex: 5,
